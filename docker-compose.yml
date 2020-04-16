@@ -1,0 +1,20 @@
+---
+version: "3.6"
+
+networks:
+  net:
+    driver: "overlay"
+
+services:
+  cleanup:
+    build:
+      context: "cleanup"
+    image: "127.0.0.1:5000/docker-cleanup"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - "net"
+    deploy:
+      mode: "global"
+
+# vim:sw=2:
