@@ -1,7 +1,9 @@
-#!/bin/sh -x
+#!/bin/sh
 #
-while sleep 10
+
+# Every hour +/- 1 minute
+while sleep $((3540 + ( $RANDOM % 120 ) ))
 do
-	date
-	docker container ls
+	docker system prune --force --filter until=168h --all
+	docker volume prune --force
 done
