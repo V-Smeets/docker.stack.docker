@@ -5,5 +5,7 @@
 while sleep $((3540 + ( $RANDOM % 120 ) ))
 do
 	docker system prune --force --filter until=168h --all
-	docker volume prune --force
+	volumeNames=`docker volume ls --filter 'dangling=true' --filter 'name=.{64}' --format '{{.Name}}'`
+	[ -n "$volumeNames" ] \
+	&& docker volume rm $volumeNames
 done
