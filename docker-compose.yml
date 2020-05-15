@@ -16,5 +16,8 @@ services:
       - "net"
     deploy:
       mode: "global"
+      restart_policy:
+        condition: any
+        delay: 1h
 
 # vim:sw=2:
